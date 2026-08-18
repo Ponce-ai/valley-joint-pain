@@ -46,6 +46,9 @@ module.exports = async (req, res) => {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "A valid email is required" });
   }
+  if (phone.replace(/\D/g, "").length < 10) {
+    return res.status(400).json({ error: "A valid phone number is required" });
+  }
   if (!painArea || !painDuration || !surgerySituation) {
     return res.status(400).json({
       error: "Incomplete assessment: pain area, duration, and surgery responses are required",

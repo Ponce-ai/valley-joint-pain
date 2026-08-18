@@ -780,8 +780,8 @@
         <input type="email" id="email" placeholder="you@example.com" required />
       </div>
       <div class="form-row">
-        <label>Phone (optional)</label>
-        <input type="tel" id="phone" placeholder="(818) 418-8165" />
+        <label>Phone <span class="req">*</span></label>
+        <input type="tel" id="phone" placeholder="(818) 418-8165" required />
       </div>
     </div>
     <div class="form-row">
@@ -969,6 +969,7 @@
   async function submitQuiz() {
     const firstName = document.getElementById('firstName').value.trim();
     const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
     if (!firstName) {
       alert('Please enter your first name.');
@@ -980,10 +981,16 @@
       document.getElementById('email').focus();
       return;
     }
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 10 && !(phoneDigits.length === 11 && phoneDigits.startsWith('1'))) {
+      alert('Please enter a valid 10-digit phone number.');
+      document.getElementById('phone').focus();
+      return;
+    }
 
     answers.firstName = firstName;
     answers.email = email;
-    answers.phone = document.getElementById('phone').value.trim();
+    answers.phone = phone;
     answers.notes = document.getElementById('notes').value.trim();
 
     if (!answers.area || !answers.duration || !answers.surgery) {
