@@ -6,9 +6,9 @@
 <link rel="icon" href="brand/favicon/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="brand/favicon/favicon.svg" />
 
-<title>Thank You | Valley Joint Pain Center, Van Nuys CA</title>
-<meta name="description" content="Your knee pain assessment has been received by Dr. Dhand's office at Valley Joint Pain Center." />
-<!-- Conversion page: reached only after a completed assessment. Keep out of search. -->
+<title>Consultation Requested | Valley Joint Pain Center, Van Nuys CA</title>
+<meta name="description" content="Your consultation request has reached Dr. Dhand's office at Valley Joint Pain Center." />
+<!-- Conversion page: reached only after the consultation-request button. Keep out of search. -->
 <meta name="robots" content="noindex, nofollow" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,6 +91,30 @@
     letter-spacing: -0.02em;
   }
   .result-title em { color: var(--amber); font-style: italic; }
+
+  .confirm-card {
+    background: var(--teal-900);
+    color: var(--bone);
+    border-radius: 8px;
+    padding: 36px;
+    margin-bottom: 36px;
+  }
+  .confirm-card h3 { color: var(--bone); font-size: 22px; margin-bottom: 12px; }
+  .confirm-card h3 em { color: var(--amber-soft); font-style: italic; }
+  .confirm-card p { color: rgba(250,248,243,0.78); font-size: 15px; line-height: 1.65; margin-bottom: 24px; }
+  .confirm-contact {
+    background: rgba(250, 248, 243, 0.12);
+    border: 1px solid rgba(250, 248, 243, 0.22);
+    border-radius: 6px;
+    padding: 18px 20px;
+    font-size: 15px;
+    color: rgba(250, 248, 243, 0.9);
+    line-height: 1.6;
+  }
+  .confirm-contact strong { color: var(--bone); font-size: 18px; }
+  .confirm-contact a { color: var(--amber-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .confirm-contact a:hover { color: var(--bone); }
+
   .result-card {
     background: var(--bone);
     border: 1px solid var(--line-soft);
@@ -109,62 +133,24 @@
   .result-text { font-family: 'Lora', serif; font-size: 18px; line-height: 1.7; color: var(--ink); }
   .result-text p { margin-bottom: 16px; }
   .result-text p:last-child { margin-bottom: 0; }
-
-  .next-steps {
-    background: var(--teal-900);
-    color: var(--bone);
-    border-radius: 8px;
-    padding: 36px;
-    margin-bottom: 36px;
-  }
-  .next-steps h3 { color: var(--bone); font-size: 22px; margin-bottom: 16px; }
-  .next-steps h3 em { color: var(--amber-soft); font-style: italic; }
-  .next-steps p { color: rgba(250,248,243,0.78); font-size: 15px; line-height: 1.65; margin-bottom: 24px; }
-  .next-actions { display: flex; flex-direction: column; gap: 10px; }
+  .next-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
   .next-action {
-    background: rgba(250,248,243,0.06);
-    border: 1px solid rgba(250,248,243,0.15);
+    background: var(--cloud);
+    border: 1px solid var(--line-soft);
     border-radius: 6px;
     padding: 16px 20px;
-    color: var(--bone);
+    color: var(--ink);
     font-size: 15px;
-    text-decoration: none;
     transition: background 0.15s, border-color 0.15s;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    cursor: pointer;
-    font-family: inherit;
   }
-  .next-action:hover { background: rgba(250,248,243,0.1); border-color: var(--amber-soft); }
-  .next-action svg { color: var(--amber-soft); flex-shrink: 0; }
-  button.next-action { width: 100%; font: inherit; cursor: pointer; appearance: none; -webkit-appearance: none; text-align: left; }
-  .next-action.primary { background: var(--amber); border-color: var(--amber); }
-  .next-action.primary:hover:not(:disabled) { background: #b56908; }
-  .next-action.primary:disabled { opacity: 0.92; cursor: wait; }
-
-  .consult-alt {
-    font-size: 13px;
-    color: rgba(250, 248, 243, 0.72);
-    line-height: 1.55;
-    margin: -2px 0 6px;
-    padding: 0 4px 12px;
-    border-bottom: 1px solid rgba(250, 248, 243, 0.12);
-  }
-  .consult-alt a { color: var(--amber-soft); text-decoration: underline; text-underline-offset: 3px; }
-  .consult-alt a:hover { color: var(--bone); }
+  .next-action:hover { background: var(--teal-50); border-color: var(--teal-700); }
+  .next-action svg { color: var(--amber); flex-shrink: 0; }
 
   .disclaimer { text-align: center; font-size: 12px; color: var(--ink-soft); line-height: 1.6; margin-top: 30px; font-style: italic; }
-  .restart-row { text-align: center; margin-top: 30px; }
-  .restart-link {
-    color: var(--ink-soft);
-    font-size: 14px;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 4px;
-  }
-  .restart-link:hover { color: var(--teal-700); text-decoration-color: var(--teal-700); }
 
   footer {
     background: var(--cloud);
@@ -201,53 +187,40 @@
 <div class="wrap">
 
   <div class="result-page">
-    <div class="result-eyebrow">Your assessment</div>
-    <h1 class="result-title">Thank you, <em id="resultName">friend</em>.</h1>
+    <div class="result-eyebrow">Consultation request</div>
+    <h1 class="result-title">Your request has been sent, <em id="resultName">friend</em>.</h1>
 
-    <div class="result-card">
-      <div class="result-card-eyebrow">Thank you · Dr. Dhand's office</div>
-      <div class="result-text">
-        <p><span id="resultNameInline">Friend</span>, thank you for taking the time to share what you're dealing with.</p>
-        <p>Based on what you've described, you may be a good candidate to explore minimally invasive options like Genicular Artery Embolization or other image-guided procedures we offer. The pattern you've described — ongoing pain that hasn't fully resolved with conservative care — is one we see often in patients who turn out to be excellent candidates for these treatments.</p>
-        <p>The most useful next step would be a brief consultation where Dr. Dhand can review any imaging you have, walk through your medical history in detail, and give you an honest assessment of which options (if any) make sense for your specific situation. There's no charge for the initial consultation, and there's no obligation to proceed with anything afterward.</p>
-        <p>Our office will be in touch shortly to discuss scheduling.</p>
-        <p>— Dr. Dhand's office at Valley Joint Pain Center</p>
+    <div class="confirm-card">
+      <h3>Our office has been <em>notified</em>.</h3>
+      <p id="confirmBody">Someone from Dr. Dhand's office will follow up soon to find a time. If you have imaging (X-ray or MRI) from another provider, have it handy; it makes the consultation more useful.</p>
+      <div class="confirm-contact">
+        <strong><a href="tel:+18184188165">(818) 418-8165</a></strong><br />
+        Mon–Fri 8:30am–5pm · <a href="location.html">Van Nuys office &amp; directions</a>
       </div>
     </div>
 
-    <div class="next-steps">
-      <h3>What happens <em>next</em>?</h3>
-      <p>Based on your responses, here are the steps we'd suggest. There's no obligation, and no charge to explore your options.</p>
+    <div class="result-card">
+      <div class="result-card-eyebrow">While you wait</div>
+      <div class="result-text">
+        <p>The initial consultation is free, and there's no obligation to proceed with anything afterward. If you'd like to read up beforehand:</p>
+      </div>
       <div class="next-actions">
-        <button
-          type="button"
-          id="consultationRequestBtn"
-          class="next-action primary"
-          aria-label="Request a free consultation; our office will be notified"
-          onclick="handleConsultationRequest(event)"
-        >
-          <span><strong>Request a free consultation</strong> — review your imaging with Dr. Dhand</span>
-        </button>
-        <p class="consult-alt" id="consultationInlineHint">
-          <strong>(818) 418-8165</strong> · Mon–Fri 8:30am–5pm ·
-          <a href="location.html">Van Nuys office &amp; directions</a>
-        </p>
         <a href="genicular-artery-embolization.html" class="next-action">
-          <span>Read more about Genicular Artery Embolization</span>
+          <span>How Genicular Artery Embolization works</span>
           <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="about-dr-sabeen-dhand.html" class="next-action">
-          <span>Learn about Dr. Dhand's background</span>
+          <span>About Dr. Dhand</span>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="conversation-guide.pdf" class="next-action" target="_blank" rel="noopener">
+          <span>The guide to talking with your doctor about non-surgical options (PDF)</span>
           <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
 
     <p class="disclaimer">This assessment is not medical advice. It's a starting point for a conversation. Final candidacy for any procedure is determined through clinical evaluation, including review of imaging and a complete medical history.</p>
-
-    <div class="restart-row">
-      <a class="restart-link" href="assessment.html">Take the assessment again</a>
-    </div>
   </div>
 
 </div>
@@ -258,55 +231,18 @@
 </footer>
 
 <script>
-  /* The assessment page stores the lead's contact details in sessionStorage right
-     before redirecting here, so the consultation request can carry them to the
-     office without putting them in the URL. A direct visit shows the generic copy. */
-  const LEAD_KEY = 'vjpAssessmentLead';
-  let lead = {};
+  /* assessment-complete stores the lead under vjpAssessmentLead and sets
+     vjpConsultNotified to "0" if the Slack notify call failed, so we can be honest
+     about whether the office actually heard. A direct visit shows the generic copy. */
   try {
-    lead = JSON.parse(sessionStorage.getItem(LEAD_KEY) || '{}') || {};
-  } catch (e) {
-    lead = {};
-  }
-
-  if (lead.firstName) {
-    document.getElementById('resultName').textContent = lead.firstName;
-    document.getElementById('resultNameInline').textContent = lead.firstName;
-  }
-
-  /* Notify the office, then go to /consultation-requested so the click is a real
-     page load that ad conversion tracking can key on. keepalive lets the request
-     finish even if the page unloads first; four seconds is the most we wait. */
-  async function handleConsultationRequest(ev) {
-    ev.preventDefault();
-    const btn = document.getElementById('consultationRequestBtn');
-    if (!btn || btn.disabled) return;
-
-    btn.disabled = true;
-    const span = btn.querySelector('span');
-    if (span) span.innerHTML = '<strong>Sending your request…</strong>';
-
-    let ok = false;
-    try {
-      const notify = fetch('/api/notify-consultation-request', {
-        method: 'POST',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: lead.firstName || '',
-          email: lead.email || '',
-          phone: lead.phone || ''
-        })
-      }).then(res => res.ok).catch(() => false);
-      const timeout = new Promise(resolve => setTimeout(() => resolve(true), 4000));
-      ok = await Promise.race([notify, timeout]);
-    } catch (err) {
-      console.error('Consultation notify failed:', err);
+    const lead = JSON.parse(sessionStorage.getItem('vjpAssessmentLead') || '{}') || {};
+    if (lead.firstName) document.getElementById('resultName').textContent = lead.firstName;
+    if (sessionStorage.getItem('vjpConsultNotified') === '0') {
+      document.querySelector('.confirm-card h3').innerHTML = 'We could not confirm your request <em>online</em>.';
+      document.getElementById('confirmBody').textContent =
+        'Please call the office directly or use the directions link below, and mention that you completed the online assessment.';
     }
-
-    try { sessionStorage.setItem('vjpConsultNotified', ok ? '1' : '0'); } catch (e) {}
-    window.location.assign('/consultation-requested');
-  }
+  } catch (e) {}
 </script>
 
 </body>
