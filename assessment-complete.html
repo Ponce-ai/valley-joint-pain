@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="brand/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="brand/favicon/favicon.svg" />
+
+<title>Thank You | Valley Joint Pain Center, Van Nuys CA</title>
+<meta name="description" content="Your knee pain assessment has been received by Dr. Dhand's office at Valley Joint Pain Center." />
+<!-- Conversion page: reached only after a completed assessment. Keep out of search. -->
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand/colors/colors.css" />
+
+<style>
+  :root {
+    --teal-900: var(--vjp-teal-900, #0a3d42);
+    --teal-700: var(--vjp-teal-700, #0d5c63);
+    --teal-500: var(--vjp-teal-500, #1a8a93);
+    --teal-100: var(--vjp-teal-100, #d6ebed);
+    --teal-50: var(--vjp-teal-50, #ecf5f5);
+    --amber: var(--vjp-amber, #c8780a);
+    --amber-soft: var(--vjp-amber-soft, #e8a043);
+    --cloud: var(--vjp-cloud, #f5f3ee);
+    --bone: var(--vjp-bone, #faf8f3);
+    --ink: var(--vjp-ink, #15201f);
+    --ink-soft: var(--vjp-ink-soft, #4a5957);
+    --line: var(--vjp-line, #d8d3c7);
+    --line-soft: var(--vjp-line-soft, #ebe7dc);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; max-width: 100%; }
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bone);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  h1, h2, h3 { font-family: 'Lora', Georgia, serif; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; color: var(--teal-900); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 32px; width: 100%; }
+
+  nav {
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 18px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 720px; margin: 0 auto; padding: 0 32px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-lockup { height: 52px; width: auto; display: block; flex-shrink: 0; }
+  .nav-back { font-size: 13px; color: var(--ink-soft); transition: color 0.15s; }
+  .nav-back:hover { color: var(--teal-700); }
+
+  main { flex: 1; display: flex; flex-direction: column; padding: 50px 0 80px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-page { animation: fadeUp 0.6s ease-out; }
+
+  .result-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--amber);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .result-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--amber); }
+  .result-title {
+    font-size: clamp(32px, 4.5vw, 44px);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    letter-spacing: -0.02em;
+  }
+  .result-title em { color: var(--amber); font-style: italic; }
+  .result-card {
+    background: var(--bone);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 36px;
+    margin-bottom: 36px;
+  }
+  .result-card-eyebrow {
+    font-size: 11px;
+    color: var(--teal-700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .result-text { font-family: 'Lora', serif; font-size: 18px; line-height: 1.7; color: var(--ink); }
+  .result-text p { margin-bottom: 16px; }
+  .result-text p:last-child { margin-bottom: 0; }
+
+  .next-steps {
+    background: var(--teal-900);
+    color: var(--bone);
+    border-radius: 8px;
+    padding: 36px;
+    margin-bottom: 36px;
+  }
+  .next-steps h3 { color: var(--bone); font-size: 22px; margin-bottom: 16px; }
+  .next-steps h3 em { color: var(--amber-soft); font-style: italic; }
+  .next-steps p { color: rgba(250,248,243,0.78); font-size: 15px; line-height: 1.65; margin-bottom: 24px; }
+  .next-actions { display: flex; flex-direction: column; gap: 10px; }
+  .next-action {
+    background: rgba(250,248,243,0.06);
+    border: 1px solid rgba(250,248,243,0.15);
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: var(--bone);
+    font-size: 15px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .next-action:hover { background: rgba(250,248,243,0.1); border-color: var(--amber-soft); }
+  .next-action svg { color: var(--amber-soft); flex-shrink: 0; }
+  button.next-action { width: 100%; font: inherit; cursor: pointer; appearance: none; -webkit-appearance: none; text-align: left; }
+  .next-action.primary { background: var(--amber); border-color: var(--amber); }
+  .next-action.primary:hover:not(:disabled) { background: #b56908; }
+  .next-action.primary:disabled { opacity: 0.92; cursor: wait; }
+
+  .consult-alt {
+    font-size: 13px;
+    color: rgba(250, 248, 243, 0.72);
+    line-height: 1.55;
+    margin: -2px 0 6px;
+    padding: 0 4px 12px;
+    border-bottom: 1px solid rgba(250, 248, 243, 0.12);
+  }
+  .consult-alt a { color: var(--amber-soft); text-decoration: underline; text-underline-offset: 3px; }
+  .consult-alt a:hover { color: var(--bone); }
+
+  .consult-request-sent {
+    background: rgba(250, 248, 243, 0.12);
+    border: 1px solid rgba(250, 248, 243, 0.22);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+  }
+  .consult-request-sent__title { font-weight: 600; font-size: 17px; color: var(--bone); margin: 0 0 10px; line-height: 1.35; }
+  .consult-request-sent__body { font-size: 14px; color: rgba(250, 248, 243, 0.88); margin: 0 0 14px; line-height: 1.6; }
+  .consult-request-sent__contact {
+    font-size: 14px;
+    color: rgba(250, 248, 243, 0.9);
+    margin: 0;
+    line-height: 1.55;
+    padding-top: 12px;
+    border-top: 1px solid rgba(250, 248, 243, 0.15);
+  }
+  .consult-request-sent__contact a { color: var(--amber-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .consult-request-sent__contact a:hover { color: var(--bone); }
+
+  .disclaimer { text-align: center; font-size: 12px; color: var(--ink-soft); line-height: 1.6; margin-top: 30px; font-style: italic; }
+  .restart-row { text-align: center; margin-top: 30px; }
+  .restart-link {
+    color: var(--ink-soft);
+    font-size: 14px;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 4px;
+  }
+  .restart-link:hover { color: var(--teal-700); text-decoration-color: var(--teal-700); }
+
+  footer {
+    background: var(--cloud);
+    border-top: 1px solid var(--line-soft);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  footer p { line-height: 1.6; max-width: 600px; margin: 0 auto; padding: 0 32px; }
+</style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18311929527"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18311929527');
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img class="logo-lockup" src="brand/logos/08-horizontal-single-line-primary.svg" alt="Valley Joint Pain Center" width="200" height="60" decoding="async" />
+    </a>
+    <a href="/" class="nav-back">← Back to site</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <div class="result-page">
+    <div class="result-eyebrow">Your assessment</div>
+    <h1 class="result-title">Thank you, <em id="resultName">friend</em>.</h1>
+
+    <div class="result-card">
+      <div class="result-card-eyebrow">Thank you · Dr. Dhand's office</div>
+      <div class="result-text">
+        <p><span id="resultNameInline">Friend</span>, thank you for taking the time to share what you're dealing with.</p>
+        <p>Based on what you've described, you may be a good candidate to explore minimally invasive options like Genicular Artery Embolization or other image-guided procedures we offer. The pattern you've described — ongoing pain that hasn't fully resolved with conservative care — is one we see often in patients who turn out to be excellent candidates for these treatments.</p>
+        <p>The most useful next step would be a brief consultation where Dr. Dhand can review any imaging you have, walk through your medical history in detail, and give you an honest assessment of which options (if any) make sense for your specific situation. There's no charge for the initial consultation, and there's no obligation to proceed with anything afterward.</p>
+        <p>Our office will be in touch shortly to discuss scheduling.</p>
+        <p>— Dr. Dhand's office at Valley Joint Pain Center</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>What happens <em>next</em>?</h3>
+      <p>Based on your responses, here are the steps we'd suggest. There's no obligation, and no charge to explore your options.</p>
+      <div class="next-actions">
+        <button
+          type="button"
+          id="consultationRequestBtn"
+          class="next-action primary"
+          aria-label="Request a free consultation; our office will be notified"
+          onclick="handleConsultationRequest(event)"
+        >
+          <span><strong>Request a free consultation</strong> — review your imaging with Dr. Dhand</span>
+        </button>
+        <div id="consultationRequestSent" class="consult-request-sent" hidden>
+          <p class="consult-request-sent__title" id="consultationSentTitle">Your request has been sent.</p>
+          <p class="consult-request-sent__body" id="consultationSentBody"></p>
+          <p class="consult-request-sent__contact">
+            <strong><a href="tel:+18184188165">(818) 418-8165</a></strong> · Mon–Fri 8:30am–5pm ·
+            <a href="location.html">Van Nuys office &amp; directions</a>
+          </p>
+        </div>
+        <p class="consult-alt" id="consultationInlineHint">
+          <strong>(818) 418-8165</strong> · Mon–Fri 8:30am–5pm ·
+          <a href="location.html">Van Nuys office &amp; directions</a>
+        </p>
+        <a href="genicular-artery-embolization.html" class="next-action">
+          <span>Read more about Genicular Artery Embolization</span>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="about-dr-sabeen-dhand.html" class="next-action">
+          <span>Learn about Dr. Dhand's background</span>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="disclaimer">This assessment is not medical advice. It's a starting point for a conversation. Final candidacy for any procedure is determined through clinical evaluation, including review of imaging and a complete medical history.</p>
+
+    <div class="restart-row">
+      <a class="restart-link" href="assessment.html">Take the assessment again</a>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <p>© 2026 Valley Joint Pain Center · Van Nuys, California · valleyjointpain.com<br><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a></p>
+</footer>
+
+<script>
+  /* The assessment page stores the lead's contact details in sessionStorage right
+     before redirecting here, so the consultation request can carry them to the
+     office without putting them in the URL. A direct visit shows the generic copy. */
+  const LEAD_KEY = 'vjpAssessmentLead';
+  let lead = {};
+  try {
+    lead = JSON.parse(sessionStorage.getItem(LEAD_KEY) || '{}') || {};
+  } catch (e) {
+    lead = {};
+  }
+
+  if (lead.firstName) {
+    document.getElementById('resultName').textContent = lead.firstName;
+    document.getElementById('resultNameInline').textContent = lead.firstName;
+  }
+
+  async function handleConsultationRequest(ev) {
+    ev.preventDefault();
+    const btn = document.getElementById('consultationRequestBtn');
+    const sent = document.getElementById('consultationRequestSent');
+    const hint = document.getElementById('consultationInlineHint');
+    const title = document.getElementById('consultationSentTitle');
+    const body = document.getElementById('consultationSentBody');
+    if (!btn || btn.disabled) return;
+
+    btn.disabled = true;
+    const span = btn.querySelector('span');
+    if (span) span.innerHTML = '<strong>Sending your request…</strong>';
+
+    let ok = false;
+    try {
+      const res = await fetch('/api/notify-consultation-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: lead.firstName || '',
+          email: lead.email || '',
+          phone: lead.phone || ''
+        })
+      });
+      ok = res.ok;
+    } catch (err) {
+      console.error('Consultation notify failed:', err);
+    }
+
+    btn.style.display = 'none';
+    if (hint) hint.style.display = 'none';
+    if (sent) sent.hidden = false;
+    if (title) title.textContent = ok ? 'Your request has been sent.' : 'We could not confirm your request online.';
+    if (body) {
+      body.innerHTML = ok
+        ? 'Our office has been notified that you&rsquo;d like a consultation. Someone will follow up soon.'
+        : 'We couldn&rsquo;t confirm that online. Please call or use the office link below.';
+    }
+  }
+</script>
+
+</body>
+</html>
