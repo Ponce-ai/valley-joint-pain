@@ -1674,46 +1674,6 @@
         color: #fff;
       }
 
-      /* Success state */
-      .lm-success {
-        display: none;
-        text-align: center;
-        padding: 20px 8px;
-      }
-      .lm-success.visible {
-        display: block;
-      }
-      .lm-success-icon {
-        width: 48px;
-        height: 48px;
-        background: var(--amber);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 16px;
-        font-size: 22px;
-        color: var(--bone);
-      }
-      .lm-success h3 {
-        font-family: "Lora", serif;
-        color: var(--bone);
-        font-size: 22px;
-        font-weight: 500;
-        margin-bottom: 10px;
-      }
-      .lm-success p {
-        color: rgba(250, 248, 243, 0.78);
-        font-size: 15px;
-        line-height: 1.6;
-      }
-      .lm-success a {
-        color: var(--amber-soft);
-        font-weight: 500;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
-
       /* ─── RESPONSIVE ─── */
       @media (max-width: 900px) {
         html {
@@ -2623,8 +2583,8 @@
 
             <div class="lm-form-wrap" id="lmFormWrap">
               <span class="lm-form-label" id="lmFormLabel"
-                >Add your name and email, then we’ll open the conversation guide
-                in a new browser tab — no account needed.</span
+                >Add your name and email, then we’ll take you straight to the
+                conversation guide — no account needed.</span
               >
 
               <div id="lmFormFields">
@@ -2675,25 +2635,6 @@
                 </p>
               </div>
 
-              <div class="lm-success" id="lmSuccess">
-                <div class="lm-success-icon">✓</div>
-                <h3 id="lmSuccessName">Your guide is open.</h3>
-                <p>
-                  If you don’t see a new tab, your browser may have blocked it —
-                  you can open
-                  <a href="conversation-guide.pdf" target="_blank" rel="noopener"
-                    >the PDF</a
-                  >
-                  or
-                  <a href="conversation-guide.html" target="_blank" rel="noopener"
-                    >the HTML version</a
-                  >
-                  directly.<br /><br />When you're ready, you can also
-                  <a href="assessment.html">take the 2-minute assessment</a> to
-                  find out if you're likely to be a candidate for one of our
-                  procedures.
-                </p>
-              </div>
             </div>
           </div>
 
@@ -3216,11 +3157,12 @@
       // Open first FAQ by default
       document.querySelector(".faq-item").classList.add("open");
 
-      // Lead magnet: open conversation guide PDF in a new tab (email delivery paused).
-      // Still POSTs to /api/submit-lead-magnet in the background when the API is available.
-      const LEAD_MAGNET_GUIDE_URL = "conversation-guide.pdf";
+      // Lead magnet: record the lead, then send the visitor to /guide-thank-you,
+      // which links to the PDF. A real page load gives ad conversion tracking a URL
+      // to key on, and avoids the pop-up blocker that window.open() ran into.
+      const LEAD_MAGNET_THANK_YOU_URL = "/guide-thank-you";
 
-      function submitLeadMagnet() {
+      async function submitLeadMagnet() {
         const nameEl = document.getElementById("lmName");
         const emailEl = document.getElementById("lmEmail");
         const btn = document.getElementById("lmSubmit");
@@ -3247,28 +3189,21 @@
         const params = new URLSearchParams(window.location.search);
         const utmSource = params.get("utm_source") || "landing page lead form";
 
-        const btnLabel = btn.innerHTML;
         btn.disabled = true;
-        btn.textContent = "Opening…";
+        btn.textContent = "One moment…";
 
-        const newTab = window.open(
-          LEAD_MAGNET_GUIDE_URL,
-          "_blank",
-          "noopener,noreferrer",
-        );
-        if (!newTab) {
-          errEl.innerHTML =
-            "We couldn’t open a new tab — often blocked by pop-up settings. Allow pop-ups for this site and try again, or open the " +
-            '<a href="conversation-guide.pdf" target="_blank" rel="noopener">PDF</a> or ' +
-            '<a href="conversation-guide.html" target="_blank" rel="noopener">HTML version</a> directly.';
-          errEl.classList.add("visible");
-          btn.disabled = false;
-          btn.innerHTML = btnLabel;
-          return;
-        }
+        try {
+          sessionStorage.setItem(
+            "vjpGuideLead",
+            JSON.stringify({ firstName: name }),
+          );
+        } catch (e) {}
 
-        fetch("/api/submit-lead-magnet", {
+        // Give the lead write a few seconds, then move on regardless. keepalive lets
+        // the request finish even if the page unloads first.
+        const save = fetch("/api/submit-lead-magnet", {
           method: "POST",
+          keepalive: true,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             firstName: name,
@@ -3276,16 +3211,10 @@
             utm_source: utmSource,
           }),
         }).catch(() => {});
+        const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
+        await Promise.race([save, timeout]);
 
-        const labelEl = document.getElementById("lmFormLabel");
-        if (labelEl) labelEl.hidden = true;
-        document.getElementById("lmFormFields").style.display = "none";
-        document.getElementById("lmSuccess").classList.add("visible");
-        document.getElementById("lmSuccessName").textContent =
-          `${name}, your guide should be open in a new tab.`;
-
-        btn.disabled = false;
-        btn.innerHTML = btnLabel;
+        window.location.assign(LEAD_MAGNET_THANK_YOU_URL);
       }
     </script>
   </body>

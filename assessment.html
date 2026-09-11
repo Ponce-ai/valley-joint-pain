@@ -808,7 +808,7 @@
     </div>
   </div>
 
-  <!-- ═══════ RESULTS ═══════ -->
+  <!-- ═══════ SAVING — shown while the POST runs, then redirects to /assessment-complete ═══════ -->
   <div class="result-page" id="results">
     <div class="result-eyebrow" id="resultEyebrow">Your assessment</div>
     <h1 class="result-title" id="resultTitle">Thank you, <em id="resultName">friend</em>.</h1>
@@ -827,47 +827,8 @@
       </div>
     </div>
 
-    <div class="next-steps" id="nextSteps" style="display: none;">
-      <h3>What happens <em>next</em>?</h3>
-      <p>Based on your responses, here are the steps we'd suggest. There's no obligation, and no charge to explore your options.</p>
-      <div class="next-actions">
-        <button
-          type="button"
-          id="consultationRequestBtn"
-          class="next-action primary"
-          aria-label="Request a free consultation; our office will be notified"
-          onclick="handleConsultationRequest(event)"
-        >
-          <span><strong>Request a free consultation</strong> — review your imaging with Dr. Dhand</span>
-        </button>
-        <div id="consultationRequestSent" class="consult-request-sent" hidden>
-          <p class="consult-request-sent__title" id="consultationSentTitle">Your request has been sent.</p>
-          <p class="consult-request-sent__body" id="consultationSentBody"></p>
-          <p class="consult-request-sent__contact">
-            <strong><a href="tel:+18184188165">(818) 418-8165</a></strong> · Mon–Fri 8:30am–5pm ·
-            <a href="location.html">Van Nuys office &amp; directions</a>
-          </p>
-        </div>
-        <p class="consult-alt" id="consultationInlineHint">
-          <strong>(818) 418-8165</strong> · Mon–Fri 8:30am–5pm ·
-          <a href="location.html">Van Nuys office &amp; directions</a>
-        </p>
-        <a href="genicular-artery-embolization.html" class="next-action">
-          <span>Read more about Genicular Artery Embolization</span>
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="about-dr-sabeen-dhand.html" class="next-action">
-          <span>Learn about Dr. Dhand's background</span>
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h13M9 1l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-
     <p class="disclaimer">This assessment is not medical advice. It's a starting point for a conversation. Final candidacy for any procedure is determined through clinical evaluation, including review of imaging and a complete medical history.</p>
 
-    <div class="restart-row">
-      <button class="restart-link" onclick="restartQuiz()">Start the assessment over</button>
-    </div>
   </div>
 
 </div>
@@ -1053,7 +1014,16 @@
         throw new Error(data.error || data.details || 'Could not save your assessment.');
       }
 
-      renderResult(generateFallback(firstName));
+      // Hand the lead's contact details to the completion page (sessionStorage,
+      // never the URL) so the consultation request there can still reach the office.
+      try {
+        sessionStorage.setItem('vjpAssessmentLead', JSON.stringify({
+          firstName,
+          email,
+          phone: answers.phone
+        }));
+      } catch (e) {}
+      window.location.assign('/assessment-complete');
     } catch (err) {
       clearInterval(loadingInterval);
       console.error('Assessment submit failed:', err);
@@ -1068,124 +1038,6 @@
       alert(err.message || 'Something went wrong. Please try again.');
     }
   }
-
-  function generateFallback(firstName) {
-    return `${firstName}, thank you for taking the time to share what you're dealing with.
-
-Based on what you've described, you may be a good candidate to explore minimally invasive options like Genicular Artery Embolization or other image-guided procedures we offer. The pattern you've described — ongoing pain that hasn't fully resolved with conservative care — is one we see often in patients who turn out to be excellent candidates for these treatments.
-
-The most useful next step would be a brief consultation where Dr. Dhand can review any imaging you have, walk through your medical history in detail, and give you an honest assessment of which options (if any) make sense for your specific situation. There's no charge for the initial consultation, and there's no obligation to proceed with anything afterward.
-
-Our office will be in touch shortly to discuss scheduling.
-
-— Dr. Dhand's office at Valley Joint Pain Center`;
-  }
-
-  function renderResult(text) {
-    const formatted = text
-      .split('\n\n')
-      .filter(p => p.trim())
-      .map(p => `<p>${escapeHtml(p.trim())}</p>`)
-      .join('');
-
-    document.getElementById('resultBody').innerHTML = `<div class="result-text">${formatted}</div>`;
-    document.getElementById('nextSteps').style.display = 'block';
-    resetConsultationRequestUi();
-  }
-
-  function resetConsultationRequestUi() {
-    const btn = document.getElementById('consultationRequestBtn');
-    const sent = document.getElementById('consultationRequestSent');
-    const hint = document.getElementById('consultationInlineHint');
-    if (sent) {
-      sent.hidden = true;
-      const body = document.getElementById('consultationSentBody');
-      if (body) body.textContent = '';
-      const title = document.getElementById('consultationSentTitle');
-      if (title) title.textContent = 'Your request has been sent.';
-    }
-    if (hint) hint.style.display = '';
-    if (btn) {
-      btn.style.display = '';
-      btn.disabled = false;
-      if (btn.dataset.origHtml) btn.innerHTML = btn.dataset.origHtml;
-    }
-  }
-
-  async function handleConsultationRequest(ev) {
-    ev.preventDefault();
-    const btn = document.getElementById('consultationRequestBtn');
-    const sent = document.getElementById('consultationRequestSent');
-    const hint = document.getElementById('consultationInlineHint');
-    const title = document.getElementById('consultationSentTitle');
-    const body = document.getElementById('consultationSentBody');
-    if (!btn || btn.disabled) return;
-    if (!btn.dataset.origHtml) btn.dataset.origHtml = btn.innerHTML;
-
-    btn.disabled = true;
-    const span = btn.querySelector('span');
-    if (span) {
-      span.innerHTML = '<strong>Sending your request…</strong>';
-    }
-
-    let ok = false;
-    try {
-      const res = await fetch('/api/notify-consultation-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: answers.firstName || '',
-          email: answers.email || '',
-          phone: answers.phone || ''
-        })
-      });
-      ok = res.ok;
-    } catch (err) {
-      console.error('Consultation notify failed:', err);
-    }
-
-    btn.style.display = 'none';
-    if (hint) hint.style.display = 'none';
-    if (sent) sent.hidden = false;
-    if (title) title.textContent = ok ? 'Your request has been sent.' : 'We could not confirm your request online.';
-    if (body) {
-      if (ok) {
-        body.innerHTML =
-          'Our office has been notified that you&rsquo;d like a consultation. Someone will follow up soon.';
-      } else {
-        body.innerHTML =
-          'We couldn&rsquo;t confirm that online. Please call or use the office link below.';
-      }
-    }
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function restartQuiz() {
-    Object.keys(answers).forEach(k => { answers[k] = (k === 'treatments') ? [] : (k === 'pain' ? 5 : ''); });
-    document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
-    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
-    document.getElementById('painSlider').value = 5;
-    painNum.textContent = '5';
-    painLabel.textContent = painLabels[5];
-    document.getElementById('next1').disabled = true;
-    document.getElementById('next2').disabled = true;
-    document.getElementById('next5').disabled = true;
-    document.getElementById('submitBtn').disabled = false;
-    document.getElementById('results').classList.remove('active');
-    document.getElementById('progressShell').style.display = 'block';
-    document.getElementById('resultBody').innerHTML = `<div class="loading-shell"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><div class="loading-text" id="loadingText">Reviewing your responses...</div></div>`;
-    document.getElementById('nextSteps').style.display = 'none';
-    resetConsultationRequestUi();
-    goTo(1);
-  }
-
-  (function initConsultationBtnSnapshot() {
-    const btn = document.getElementById('consultationRequestBtn');
-    if (btn && !btn.dataset.origHtml) btn.dataset.origHtml = btn.innerHTML;
-  })();
 </script>
 
 </body>
